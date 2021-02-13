@@ -6,10 +6,8 @@ function App() {
 
 	return (
 		<>
-			<body>
-				<Dashboard />
-				<Sidebar/>
-			</body>
+			<Dashboard />
+			<Sidebar/>
 		</>	
 	);
 }

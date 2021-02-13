@@ -1,117 +1,83 @@
-import Footer from "./Footer";
+import { useState, useEffect } from "react";
 import Header from "./Header";
+import HealthCondition from "./HealthCondition";
+import TrainningCounter from "./TrainningCounter";
+import ChartImc from "./ChartImc";
 import TrainningList from "./TrainningList";
+import TrainningTypeList from "./TrainningTypeList";
+import Footer from "./Footer";
 
 const Dashboard = () => {
+
+    const [ trainning, setTrainning ] = useState([]);
+    const [ trainningType, setTrainningType ] = useState([]);
+    // fc55b60979f9355be57535d431d302b2
+    // const start = async () => {
+    //     const response = await fetch('https://trainning-rest-api.herokuapp.com/v1/users/login',{
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ 
+    //             "username": "manucleal@gmail.com",
+    //             "password": "1234"
+    //         })
+    //     });
+    //     const people = await response.json();
+    //     console.log(people);
+    // }
+    // start();
+    useEffect(() => {    
+        fetch('https://trainning-rest-api.herokuapp.com/v1/training-types', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'fc55b60979f9355be57535d431d302b2'
+            }           
+        })
+        .then((response) => response.json())
+        .then((data) => setTrainningType(data));
+
+        fetch("https://trainning-rest-api.herokuapp.com/v1/users/31/trainings", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'fc55b60979f9355be57535d431d302b2'
+            }           
+        })
+        .then((response) => response.json())
+        .then((data) => setTrainning(data));
+            
+    }, []);
+
     return (
         <div id="right-panel" className="right-panel">
             <Header />
             <div className="content">
-                {/* <!-- Animated */}
                 <div className="animated fadeIn">
-                    {/* <!-- Widgets  */}
+
                     <div className="row">
-                        <div className="col-lg-3 col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="stat-widget-five">
-                                        <div className="stat-icon dib flat-color-1">
-                                            <i className="pe-7s-cash"></i>
-                                        </div>
-                                        <div className="stat-content">
-                                            <div className="text-left dib">
-                                                <div className="stat-text">$<span className="count">23569</span></div>
-                                                <div className="stat-heading">Revenue</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="col-lg-6 col-md-6">
+                            <HealthCondition />
                         </div>
 
-                        <div className="col-lg-3 col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="stat-widget-five">
-                                        <div className="stat-icon dib flat-color-2">
-                                            <i className="pe-7s-cart"></i>
-                                        </div>
-                                        <div className="stat-content">
-                                            <div className="text-left dib">
-                                                <div className="stat-text"><span className="count">3435</span></div>
-                                                <div className="stat-heading">Sales</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="stat-widget-five">
-                                        <div className="stat-icon dib flat-color-3">
-                                            <i className="pe-7s-browser"></i>
-                                        </div>
-                                        <div className="stat-content">
-                                            <div className="text-left dib">
-                                                <div className="stat-text"><span className="count">349</span></div>
-                                                <div className="stat-heading">Templates</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="stat-widget-five">
-                                        <div className="stat-icon dib flat-color-4">
-                                            <i className="pe-7s-users"></i>
-                                        </div>
-                                        <div className="stat-content">
-                                            <div className="text-left dib">
-                                                <div className="stat-text"><span className="count">2986</span></div>
-                                                <div className="stat-heading">Clients</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="col-lg-6 col-md-6">
+                            <TrainningCounter />
                         </div>
                     </div>
-                    {/* Widgets */}
 
                     <div className="clearfix"></div>
-                    {/* <!-- Orders */}
+
                     <div className="orders">
                         <div className="row">
-                            <TrainningList />
+                            <TrainningList trainning={ trainning }/>
                             <div className="col-xl-4">
                                 <div className="row">
-                                    <div className="col-lg-6 col-xl-12">
-                                        <div className="card br-0">
-                                            <div className="card-body">
-                                                <div className="chart-container ov-h">
-                                                    <div id="flotPie1" className="float-chart"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-6 col-xl-12">
-                                        <div className="card bg-flat-color-3  ">
-                                            <div className="card-body">
-                                                <h4 className="card-title m-0  white-color ">August 2018</h4>
-                                            </div>
-                                            <div className="card-body">
-                                                <div id="flotLine5" className="flot-line"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <ChartImc />
+                                    <TrainningTypeList />
                                 </div>
                             </div>
                         </div>
@@ -126,48 +92,7 @@ const Dashboard = () => {
                                         <div className="todo-list">
                                             <div className="tdl-holder">
                                                 <div className="tdl-content">
-                                                    {/* <ul>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox"/><i className="check-box"></i><span>Conveniently fabricate interactive technology for ....</span>
-                                                            <a href='#' className="fa fa-times"></a>
-                                                            <a href='#' className="fa fa-pencil"></a>
-                                                            <a href='#' className="fa fa-check"></a>
-                                                        </label>
-                                                    <li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox"/><i className="check-box"></i><span>Creating component page</span>
-                                                            <a href='#' className="fa fa-times"></a>
-                                                            <a href='#' className="fa fa-pencil"></a>
-                                                            <a href='#' className="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox" checked/><i className="check-box"></i><span>Follow back those who follow you</span>
-                                                            <a href='#' className="fa fa-times"></a>
-                                                            <a href='#' className="fa fa-pencil"></a>
-                                                            <a href='#' className="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox" checked/><i className="check-box"></i><span>Design One page theme</span>
-                                                            <a href='#' className="fa fa-times"></a>
-                                                            <a href='#' className="fa fa-pencil"></a>
-                                                            <a href='#' className="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox" checked/><i className="check-box"></i><span>Creating component page</span>
-                                                            <a href='#' className="fa fa-times"></a>
-                                                            <a href='#' className="fa fa-pencil"></a>
-                                                            <a href='#' className="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                </ul> */}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -333,7 +258,6 @@ const Dashboard = () => {
                     </div>
                     {/* #add-category */}
                 </div>
-                {/* animated */}
             </div>
             <Footer />
         </div>
