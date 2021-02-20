@@ -1,5 +1,4 @@
 const TrainningList = ({ trainning }) => {
-    console.log(trainning);
     return (
         <div className="col-xl-8">
             <div className="card">

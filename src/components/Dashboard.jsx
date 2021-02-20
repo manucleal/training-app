@@ -7,50 +7,20 @@ import TrainningList from "./TrainningList";
 import TrainningTypeList from "./TrainningTypeList";
 import Footer from "./Footer";
 
+// Services
+import { TrainningService } from "../services/TrainningService";
+
 const Dashboard = () => {
 
     const [ trainning, setTrainning ] = useState([]);
     const [ trainningType, setTrainningType ] = useState([]);
-    // fc55b60979f9355be57535d431d302b2
-    // const start = async () => {
-    //     const response = await fetch('https://trainning-rest-api.herokuapp.com/v1/users/login',{
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ 
-    //             "username": "manucleal@gmail.com",
-    //             "password": "1234"
-    //         })
-    //     });
-    //     const people = await response.json();
-    //     console.log(people);
-    // }
-    // start();
-    useEffect(() => {    
-        fetch('https://trainning-rest-api.herokuapp.com/v1/training-types', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'fc55b60979f9355be57535d431d302b2'
-            }           
-        })
-        .then((response) => response.json())
-        .then((data) => setTrainningType(data));
+    const instance = new TrainningService();
 
-        fetch("https://trainning-rest-api.herokuapp.com/v1/users/31/trainings", {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'fc55b60979f9355be57535d431d302b2'
-            }           
-        })
-        .then((response) => response.json())
-        .then((data) => setTrainning(data));
-            
+    useEffect( async() => {          
+        let result = await instance.Login();
+        instance.SetToken(result.token);
+        setTrainningType(await instance.GetTrainningTypes());
+        setTrainning(await instance.GetTrainnings());            
     }, []);
 
     return (
@@ -77,7 +47,7 @@ const Dashboard = () => {
                             <div className="col-xl-4">
                                 <div className="row">
                                     <ChartImc />
-                                    <TrainningTypeList />
+                                    <TrainningTypeList trainningType={ trainningType }/>
                                 </div>
                             </div>
                         </div>
