@@ -18,6 +18,7 @@ const Dashboard = () => {
 
     useEffect( async() => {          
         let result = await instance.Login();
+        console.log(result);
         instance.SetToken(result.token);
         setTrainningType(await instance.GetTrainningTypes());
         setTrainning(await instance.GetTrainnings());            
@@ -35,7 +36,7 @@ const Dashboard = () => {
                         </div>
 
                         <div className="col-lg-6 col-md-6">
-                            <TrainningCounter />
+                            <TrainningCounter trainningCounter={ trainning.length }/>
                         </div>
                     </div>
 

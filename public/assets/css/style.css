@@ -877,7 +877,7 @@ aside.left-panel {
   padding-top: 7px; }
 .right-panel .navbar-header {
   width: 100%;
-  background-color: #fff;
+  /* background-color: #fff; */
   padding: 0 1.25em 0 0; }
   .right-panel .navbar-header > a {
     display: inline-block; }
@@ -2503,3 +2503,13 @@ footer.site-footer {
     right: 20px !important; }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/* My style*/
+#logo-login {
+  max-width: 40%; 
+}
+
+#logo-dash {
+  max-width: 22%; 
+}

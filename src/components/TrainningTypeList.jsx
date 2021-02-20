@@ -1,4 +1,5 @@
-const TrainningTypeList = () => {
+const TrainningTypeList = ({ trainningType }) => {
+    console.log(trainningType);
     return (
         <div className="col-lg-6 col-xl-12">
             <div className="card bg-flat-color-3">

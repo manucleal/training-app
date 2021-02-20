@@ -55,7 +55,7 @@ export class TrainningService {
     }
 
     GetTrainnings() {
-        const action = 'users/31/trainings';
+        const action = 'users/321/trainings';
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
 }

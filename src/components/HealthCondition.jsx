@@ -4,7 +4,7 @@ const HealthCondition = () => {
             <div className="card-body">
                 <div className="stat-widget-five">
                     <div className="stat-icon dib flat-color-1">
-                        <i className="pe-7s-cash"></i>
+                        <i className="pe-7s-user"></i>
                     </div>
                     <div className="stat-content">
                         <div className="text-left dib">

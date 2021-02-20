@@ -3,9 +3,10 @@ const Header = () => {
         <header id="header" className="header">
             <div className="top-left">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="./"><img src="images/logo.png" alt="Logo" /></a>
-                    <a className="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo" /></a>
-                    <a id="menuToggle" className="menutoggle"><i className="fa fa-bars"></i></a>
+                    <a className="navbar-brand hidden" href="./"><img src="images/logo.png" alt="Logo" /></a>
+                    {/* <a className="navbar-brand" href="./"><img src="images/logo2.png" alt="Logo" /></a> */}
+                    <a className="navbar-brand" href="./"><img id="logo-dash" src="images/fit-logo.png" alt="Logo" /></a>
+                    {/* <a id="menuToggle" className="menutoggle"><i className="fa fa-bars"></i></a> */}
                 </div>
             </div>
             <div className="top-right">
