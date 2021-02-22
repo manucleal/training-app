@@ -27,14 +27,14 @@ const TrainningList = ({ trainning }) => {
                                             <td className="serial">{i+1}.</td>
                                             <td className="avatar">
                                                 <div className="round-img">
-                                                    <a href="#"><img className="rounded-circle" src="images/avatar/1.jpg" alt="" /></a>
+                                                    <a href="#"><img className="rounded-circle" src="images/avatar/avatar.png" alt="" /></a>
                                                 </div>
                                             </td>
                                             <td>#{t.id}</td>
                                             <td><span className="name">{t.trainning_type}</span></td>
                                             <td><span className="product">{t.minutes}</span></td>
                                             <td><span className="count">{t.weight}</span></td>
-                                            <td><span className="badge badge-complete">Complete</span></td>
+                                            <td><span className="badge badge-pending">Delete</span></td>
                                         </tr>
                                     )
                                 }
@@ -49,9 +49,7 @@ const TrainningList = ({ trainning }) => {
                                     <td>  <span className="name">Mary Silva</span> </td>
                                     <td> <span className="product">Magic Mouse</span> </td>
                                     <td><span className="count">250</span></td>
-                                    <td>
-                                        <span className="badge badge-pending">Pending</span>
-                                    </td>
+                                    <td><span className="badge badge-pending">Pending</span></td>
                                 </tr> */}
                             </tbody>
                         </table>

@@ -2511,5 +2511,10 @@ footer.site-footer {
 }
 
 #logo-dash {
-  max-width: 22%; 
+  max-width: 15%; 
+}
+
+#submit-add-trinning {
+  margin-top: 7%;
+  float: right;
 }

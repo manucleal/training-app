@@ -1,9 +1,10 @@
-export class TrainningService {
+export class ApiService {
     constructor(){
         this.apiUrl = 'https://trainning-rest-api.herokuapp.com/v1/';
         this.httpHeaders = {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': '8cc9d6d4ae9233db164e45618eff1418'
         };
     };
 
@@ -40,6 +41,20 @@ export class TrainningService {
         return await response.json();
     }
 
+    async delete(url, httpHeaders) {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: httpHeaders
+        });
+
+        if (!response.ok) {
+            console.log(response);
+            return response;
+        }
+
+        return await response.json();
+    }    
+
     Login() {
         const action = 'users/login';
         let data = JSON.stringify({ 
@@ -54,30 +69,18 @@ export class TrainningService {
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
 
-    GetTrainnings() {
-        const action = 'users/321/trainings';
+    GetTrainnings(id) {
+        const action = `users/${id}/trainings`;
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
+
+    SaveTrainnings(data) {
+        const action = 'trainings'
+        return this.post(this.apiUrl + action, JSON.stringify(data), this.httpHeaders);
+    }
+
+    DeleteTrainnings(user_id, trainning_id) {
+        const action = `users/${user_id}/trainings/${trainning_id}`;
+        return this.delete(this.apiUrl + action, this.httpHeaders);
+    }
 }
-
-
-
-    // const apiUrl = 'https://trainning-rest-api.herokuapp.com/v1/';
-    // const httpHeaders = {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    // }; 
-    
-    // const get = async (url, httpHeaders) => {
-    //     const response = await fetch(url, {
-    //         method: 'GET',
-    //         headers: httpHeaders
-    //     });
-
-    //     if (!response.ok) {
-    //         const message = `An error has occured: ${response.status}`;
-    //         throw new Error(message);
-    //     }
-
-    //     return await response.json();
-    // };

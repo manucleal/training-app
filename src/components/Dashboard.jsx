@@ -4,25 +4,36 @@ import HealthCondition from "./HealthCondition";
 import TrainningCounter from "./TrainningCounter";
 import ChartImc from "./ChartImc";
 import TrainningList from "./TrainningList";
-import TrainningTypeList from "./TrainningTypeList";
+import AddTrainning from "./AddTrainning";
 import Footer from "./Footer";
 
 // Services
-import { TrainningService } from "../services/TrainningService";
+import { ApiService } from "../services/ApiService";
 
 const Dashboard = () => {
 
     const [ trainning, setTrainning ] = useState([]);
     const [ trainningType, setTrainningType ] = useState([]);
-    const instance = new TrainningService();
+    let sessionStorage = {id:321};
+    const instance = new ApiService();
 
-    useEffect( async() => {          
-        let result = await instance.Login();
-        console.log(result);
-        instance.SetToken(result.token);
+    useEffect(async() => {
+        // sessionStorage = await instance.Login();
+        // await instance.SetToken(sessionStorage.token);
+        // console.log(sessionStorage.token);
         setTrainningType(await instance.GetTrainningTypes());
-        setTrainning(await instance.GetTrainnings());            
+        setTrainning(await instance.GetTrainnings(sessionStorage.id));
     }, []);
+
+    const addTrainning = async trinning => {
+        // instance.SetToken(sessionStorage.token);
+        trinning.user_id = sessionStorage.id;
+        let responseSave = await instance.SaveTrainnings(trinning);
+        if(responseSave.status == 200){
+            setTrainning([...trainning, trinning]);
+        }
+        console.log(responseSave);        
+    }
 
     return (
         <div id="right-panel" className="right-panel">
@@ -48,12 +59,12 @@ const Dashboard = () => {
                             <div className="col-xl-4">
                                 <div className="row">
                                     <ChartImc />
-                                    <TrainningTypeList trainningType={ trainningType }/>
+                                    <AddTrainning trainningType={ trainningType } addTrainning={ addTrainning } />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* .orders To Do and Live Chat */}
+
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="card">
