@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import HealthCondition from "./HealthCondition";
-import TrainningCounter from "./TrainningCounter";
+import TrainingCounter from "./TrainingCounter";
 import ChartImc from "./ChartImc";
-import TrainningList from "./TrainningList";
-import AddTrainning from "./AddTrainning";
+import TrainingList from "./TrainingList";
+import AddTraining from "./AddTraining";
 import Footer from "./Footer";
 
 // Services
@@ -12,8 +12,8 @@ import { ApiService } from "../services/ApiService";
 
 const Dashboard = () => {
 
-    const [ trainning, setTrainning ] = useState([]);
-    const [ trainningType, setTrainningType ] = useState([]);
+    const [ training, setTraining ] = useState([]);
+    const [ trainingType, setTrainingType ] = useState([]);
     let sessionStorage = {id:321};
     const instance = new ApiService();
 
@@ -21,16 +21,16 @@ const Dashboard = () => {
         // sessionStorage = await instance.Login();
         // await instance.SetToken(sessionStorage.token);
         // console.log(sessionStorage.token);
-        setTrainningType(await instance.GetTrainningTypes());
-        setTrainning(await instance.GetTrainnings(sessionStorage.id));
+        setTrainingType(await instance.GetTrainingTypes());
+        setTraining(await instance.GetTrainings(sessionStorage.id));
     }, []);
 
-    const addTrainning = async trinning => {
+    const addTraining = async trinning => {
         // instance.SetToken(sessionStorage.token);
         trinning.user_id = sessionStorage.id;
-        let responseSave = await instance.SaveTrainnings(trinning);
+        let responseSave = await instance.SaveTrainings(trinning);
         if(responseSave.status == 200){
-            setTrainning([...trainning, trinning]);
+            setTraining([...training, trinning]);
         }
         console.log(responseSave);        
     }
@@ -47,7 +47,7 @@ const Dashboard = () => {
                         </div>
 
                         <div className="col-lg-6 col-md-6">
-                            <TrainningCounter trainningCounter={ trainning.length }/>
+                            <TrainingCounter trainingCounter={ training.length }/>
                         </div>
                     </div>
 
@@ -55,11 +55,11 @@ const Dashboard = () => {
 
                     <div className="orders">
                         <div className="row">
-                            <TrainningList trainning={ trainning }/>
+                            <TrainingList training={ training }/>
                             <div className="col-xl-4">
                                 <div className="row">
                                     <ChartImc />
-                                    <AddTrainning trainningType={ trainningType } addTrainning={ addTrainning } />
+                                    <AddTraining trainingType={ trainingType } addTraining={ addTraining } />
                                 </div>
                             </div>
                         </div>

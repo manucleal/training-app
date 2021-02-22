@@ -64,23 +64,23 @@ export class ApiService {
         return this.post(this.apiUrl + action, data, this.httpHeaders);
     }
 
-    GetTrainningTypes() {
+    GetTrainingTypes() {
         const action = 'training-types';
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
 
-    GetTrainnings(id) {
+    GetTrainings(id) {
         const action = `users/${id}/trainings`;
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
 
-    SaveTrainnings(data) {
+    SaveTrainings(data) {
         const action = 'trainings'
         return this.post(this.apiUrl + action, JSON.stringify(data), this.httpHeaders);
     }
 
-    DeleteTrainnings(user_id, trainning_id) {
-        const action = `users/${user_id}/trainings/${trainning_id}`;
+    DeleteTrainings(user_id, training_id) {
+        const action = `users/${user_id}/trainings/${training_id}`;
         return this.delete(this.apiUrl + action, this.httpHeaders);
     }
 }

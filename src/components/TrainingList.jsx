@@ -1,10 +1,10 @@
-const TrainningList = ({ trainning }) => {
-    console.log(trainning);
+const TrainingList = ({ training }) => {
+    console.log(training);
     return (
         <div className="col-xl-8">
             <div className="card">
                 <div className="card-body">
-                    <h4 className="box-title">Trainning</h4>
+                    <h4 className="box-title">Training</h4>
                 </div>
                 <div className="card-body--">
                     <div className="table-stats order-table ov-h">
@@ -22,7 +22,7 @@ const TrainningList = ({ trainning }) => {
                             </thead>
                             <tbody>
                                 {
-                                    trainning.map((t, i) => 
+                                    training.map((t, i) => 
                                         <tr key={i}>
                                             <td className="serial">{i+1}.</td>
                                             <td className="avatar">
@@ -31,7 +31,7 @@ const TrainningList = ({ trainning }) => {
                                                 </div>
                                             </td>
                                             <td>#{t.id}</td>
-                                            <td><span className="name">{t.trainning_type}</span></td>
+                                            <td><span className="name">{t.training_type}</span></td>
                                             <td><span className="product">{t.minutes}</span></td>
                                             <td><span className="count">{t.weight}</span></td>
                                             <td><span className="badge badge-pending">Delete</span></td>
@@ -60,4 +60,4 @@ const TrainningList = ({ trainning }) => {
     );
 }
 
-export default TrainningList;
+export default TrainingList;

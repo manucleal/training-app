@@ -1,4 +1,4 @@
-const TrainningCounter = ({ trainningCounter }) => {
+const TrainingCounter = ({ trainingCounter }) => {
     return (
         <div className="card">
             <div className="card-body">
@@ -8,7 +8,7 @@ const TrainningCounter = ({ trainningCounter }) => {
                     </div>
                     <div className="stat-content">
                         <div className="text-left dib">
-                            <div className="stat-text"><span className="count">{ trainningCounter }</span></div>
+                            <div className="stat-text"><span className="count">{ trainingCounter }</span></div>
                             <div className="stat-heading">Training Counter</div>
                         </div>
                     </div>
@@ -18,4 +18,4 @@ const TrainningCounter = ({ trainningCounter }) => {
     );
 }
 
-export default TrainningCounter;
+export default TrainingCounter;
