@@ -1,5 +1,4 @@
 const TrainingList = ({ training }) => {
-    console.log(training);
     return (
         <div className="col-xl-8">
             <div className="card">
@@ -38,19 +37,6 @@ const TrainingList = ({ training }) => {
                                         </tr>
                                     )
                                 }
-                                {/*<tr>
-                                    <td className="serial">4.</td>
-                                    <td className="avatar">
-                                        <div className="round-img">
-                                            <a href="#"><img className="rounded-circle" src="images/avatar/4.jpg" alt="" /></a>
-                                        </div>
-                                    </td>
-                                    <td> #5466 </td>
-                                    <td>  <span className="name">Mary Silva</span> </td>
-                                    <td> <span className="product">Magic Mouse</span> </td>
-                                    <td><span className="count">250</span></td>
-                                    <td><span className="badge badge-pending">Pending</span></td>
-                                </tr> */}
                             </tbody>
                         </table>
                     </div>

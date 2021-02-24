@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import Sidebar from "./Sidebar";
 import Header from "./Header";
 import HealthCondition from "./HealthCondition";
 import TrainingCounter from "./TrainingCounter";
@@ -10,32 +12,44 @@ import Footer from "./Footer";
 // Services
 import { ApiService } from "../services/ApiService";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
     const [ training, setTraining ] = useState([]);
     const [ trainingType, setTrainingType ] = useState([]);
-    let sessionStorage = {id:321};
     const instance = new ApiService();
 
     useEffect(async() => {
-        // sessionStorage = await instance.Login();
-        // await instance.SetToken(sessionStorage.token);
-        // console.log(sessionStorage.token);
-        setTrainingType(await instance.GetTrainingTypes());
-        setTraining(await instance.GetTrainings(sessionStorage.id));
+        // let loginResult = await instance.Login();
+        // if(loginResult.token){
+        //     let storage = window.localStorage;
+        //     storage.setItem('credentials', JSON.stringify(loginResult));
+            
+        //     // props.dispatch({ type:'setCredentials', payload: loginResult });
+        // }
+        // let getTrainingresult = await instance.GetTrainings(props.id, props.accessToken);
+
+        // if(getTrainingresult.ok){
+        //     console.log('ENTROOOO');
+        //     console.log(getTrainingresult);
+        //     props.dispatch({ type:'setTraining', payload: getTrainingresult });
+        // }
+        // setTrainingType(await instance.GetTrainingTypes());
+        // setTraining(await instance.GetTrainings(sessionStorage.id));
     }, []);
 
     const addTraining = async trinning => {
         // instance.SetToken(sessionStorage.token);
-        trinning.user_id = sessionStorage.id;
-        let responseSave = await instance.SaveTrainings(trinning);
-        if(responseSave.status == 200){
-            setTraining([...training, trinning]);
-        }
-        console.log(responseSave);        
+        // trinning.user_id = sessionStorage.id;
+        // let responseSave = await instance.SaveTrainings(trinning);
+        // if(responseSave.status == 200){
+        //     setTraining([...training, trinning]);
+        // }
+        // console.log(responseSave);        
     }
 
     return (
+    <>
+        <Sidebar />
         <div id="right-panel" className="right-panel">
             <Header />
             <div className="content">
@@ -243,7 +257,15 @@ const Dashboard = () => {
             </div>
             <Footer />
         </div>
+        </>
     );
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+    id: state.userId,
+    accessToken: state.accessToken,
+    training: state.training,
+    // trainingType: state.trainingType
+})
+
+export default connect(mapStateToProps)(Dashboard);

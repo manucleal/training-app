@@ -2,9 +2,8 @@ export class ApiService {
     constructor(){
         this.apiUrl = 'https://trainning-rest-api.herokuapp.com/v1/';
         this.httpHeaders = {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': '8cc9d6d4ae9233db164e45618eff1418'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         };
     };
 
@@ -64,13 +63,15 @@ export class ApiService {
         return this.post(this.apiUrl + action, data, this.httpHeaders);
     }
 
-    GetTrainingTypes() {
+    GetTrainingTypes(credentials) {
         const action = 'training-types';
+        this.SetToken(credentials);
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
 
-    GetTrainings(id) {
+    GetTrainings(id, credentials) {
         const action = `users/${id}/trainings`;
+        this.SetToken(credentials);
         return this.get(this.apiUrl + action, this.httpHeaders);
     }
 

@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import Select from 'react-select';
 
-const AddTraining = (props) => {
+const AddTraining = ({ trainingType, addTraining }) => {
     
-    const { trainingType, addTraining } = props;
-    console.log(trainingType);
     // Selected Options select
     const [ selectedOption, setSelectedOption ] = useState([]);
 
@@ -24,8 +22,6 @@ const AddTraining = (props) => {
             weight: Number(weight.current.value)
         });
     }
-
-    console.log(trainingType);
     
     return (
         <div className="col-lg-6 col-xl-12">

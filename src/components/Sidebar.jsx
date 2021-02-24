@@ -1,6 +1,5 @@
 const Sidebar = () => {
     return (
-    <>
         <aside id="left-panel" className="left-panel">
             <nav className="navbar navbar-expand-sm navbar-default">
                 <div id="main-menu" className="main-menu collapse navbar-collapse">
@@ -49,7 +48,6 @@ const Sidebar = () => {
                 </div>
             </nav>
         </aside>
-        </>
     );
 }
 
