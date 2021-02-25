@@ -10,6 +10,8 @@ const reducer = (state = initialState, action) => {
 			return { ...state, trainings: action.payload }
 		case 'SET_TRAININGS_TYPES':
 			return { ...state, trainingsTypes: action.payload }
+		case 'SAVE_TRAINING':
+			return { ...state, trainings: [...state.trainings, action.payload ] }			
 		default:
 			return state;
 	}

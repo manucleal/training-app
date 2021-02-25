@@ -83,6 +83,8 @@ const saveTrainings = (data) => {
     const credentials = JSON.parse(localStorage.getItem('credentials'));
     const action = 'trainings'
     httpHeaders.Authorization = credentials.token;
+    data.user_id = credentials.id;
+    console.log(data);
     return post(apiUrl + action, JSON.stringify(data), httpHeaders);
 };
 

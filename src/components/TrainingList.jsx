@@ -30,7 +30,7 @@ const TrainingList = ({ training }) => {
                                                 </div>
                                             </td>
                                             <td>#{t.id}</td>
-                                            <td><span className="name">{t.training_type}</span></td>
+                                            <td><span className="name">{t.trainning_type}</span></td>
                                             <td><span className="product">{t.minutes}</span></td>
                                             <td><span className="count">{t.weight}</span></td>
                                             <td><span className="badge badge-pending">Delete</span></td>

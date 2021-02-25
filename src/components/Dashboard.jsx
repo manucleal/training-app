@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -18,11 +18,11 @@ const Dashboard = (props) => {
     useEffect(async() => {
         let responseGetTrainings = await ApiService.getTrainings();
         if(responseGetTrainings.length){
-            props.dispatch({ type:'SET_TRAININGS', payload: responseGetTrainings });
+            props.dispatch({ type: 'SET_TRAININGS', payload: responseGetTrainings });
         }
         let responseGetTrainingsTypes = await ApiService.getTrainingsTypes();
         if(responseGetTrainingsTypes.length){
-            props.dispatch({ type:'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });
+            props.dispatch({ type: 'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });
         }
     }, []);
 
