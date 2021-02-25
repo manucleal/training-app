@@ -1,35 +1,74 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 
-const Register = () => {
+// Services
+import ApiService from "../services/ApiService";
+
+
+const Register = ({ logged, dispatch }) => {
+    const { register, errors, handleSubmit, reset } = useForm({});
+    let history = useHistory();
+    
+    const onSubmit = async (data) => {
+        localStorage.clear();
+        let responseRegister = await ApiService.register(data);
+        if(responseRegister.status && responseRegister.status == 200){
+            localStorage.setItem('credentials', JSON.stringify(responseRegister.user));
+            dispatch({ type: "REGISTER" });
+            history.push('/');
+        }
+    }
+    
     return (
         <div className="sufee-login d-flex align-content-center flex-wrap">
             <div className="container">
                 <div className="login-content">
                     <div className="login-logo">
                         <a href="index.html">
-                            {/* <img className="align-content" src="images/logo.png" alt="" /> */}
                             <img id="logo-login" className="align-content" src="images/fit-logo.png" alt="" />
                         </a>
                     </div>
                     <div className="login-form">
-                        <form>
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group">
                                 <label>User Name</label>
-                                <input type="email" className="form-control" />
+                                <input type="email" className="form-control" name="userName" ref={
+                                    register({
+                                        required: { value: true, message: 'User Name is required' }
+                                    })
+                                }/>
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors?.userName?.message}
+                                </span>                                
                             </div>
                             <div className="form-group">
                                 <label>User Height</label>
-                                <input type="number" className="form-control" />
+                                <input type="number" className="form-control" name="userHeight" ref={
+                                    register({
+                                        required: { value: true, message: 'User Height is required' }
+                                    })
+                                }/>
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors?.userHeight?.message}
+                                </span>                                
                             </div>
                             <div className="form-group">
                                 <label>Password</label>
-                                <input type="password" className="form-control" />
+                                <input type="password" className="form-control" name="password" ref={
+                                    register({
+                                        required: { value: true, message: 'Password is required' }
+                                    })
+                                }/>
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors?.password?.message}
+                                </span>
                             </div>
-                            <div className="checkbox">
+                            {/* <div className="checkbox">
                                 <label>
                                     <input type="checkbox" /> Agree the terms and policy
-                            </label>
-                            </div>
+                                </label>
+                            </div> */}
                             <button type="submit" className="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
                             <div className="register-link m-t-15 text-center">
                                 <p>Already have account ? <Link to="/login"> Sign in</Link></p>
@@ -42,4 +81,8 @@ const Register = () => {
     );
 }
 
-export default Register;
+const mapStateToProps = (state) => ({
+
+})
+
+export default connect(mapStateToProps)(Register);

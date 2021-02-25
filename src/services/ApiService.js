@@ -46,14 +46,22 @@ const del = async (url, httpHeaders) => {
 
     return await response.json();
 };
+const register = (credentials) => {
+    const action = 'users/register';
+    let data = JSON.stringify({ 
+        'username': credentials.userName,
+        'password': credentials.password,
+        'height': Number(credentials.userHeight)
+    });
+    return post(apiUrl + action, data, httpHeaders);
+};
 
 const login = (credentials) => {
     const action = 'users/login';
     let data = JSON.stringify({ 
-        "username": credentials.userName,
-        "password": credentials.password
+        'username': credentials.userName,
+        'password': credentials.password
     });
-
     return post(apiUrl + action, data, httpHeaders);
 };
 
@@ -84,6 +92,7 @@ const deleteTrainings = (user_id, training_id) => {
 };
 
 module.exports = {
+    register: register,
     login: login,
     getTrainings: getTrainings,
     getTrainingsTypes: getTrainingsTypes,

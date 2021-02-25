@@ -16,8 +16,7 @@ const Login = ({ logged, dispatch }) => {
         
         if(responseLogin.id) {
             localStorage.setItem('credentials', JSON.stringify(responseLogin));
-            dispatch({ type:"LOGIN" })
-            // console.log(localStorage.getItem('credentials'));
+            dispatch({ type:"LOGIN" });
             history.push('/');
         }
     }
@@ -36,24 +35,24 @@ const Login = ({ logged, dispatch }) => {
                             <div className="form-group">
                                 <label>User Name</label>
                                 <input type="email" className="form-control" name="userName" ref={
-                                register({
-                                    required: { value: true, message: 'User Name is required' }
-                                })
-                            }/>
-                            <span className="text-danger text-small d-block mb-2">
-                                {errors?.userName?.message}
-                            </span>
+                                    register({
+                                        required: { value: true, message: 'User Name is required' }
+                                    })
+                                }/>
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors?.userName?.message}
+                                </span>
                             </div>
                             <div className="form-group">
                                 <label>Password</label>
                                 <input type="password" className="form-control" name="password" ref={
-                                register({
-                                    required: { value: true, message: 'Password is required' }
-                                })
-                            }/>
-                            <span className="text-danger text-small d-block mb-2">
-                                {errors?.password?.message}
-                            </span>                            
+                                    register({
+                                        required: { value: true, message: 'Password is required' }
+                                    })
+                                }/>
+                                <span className="text-danger text-small d-block mb-2">
+                                    {errors?.password?.message}
+                                </span>                            
                             </div>
                             <div className="checkbox">
                                 <label>
@@ -66,7 +65,6 @@ const Login = ({ logged, dispatch }) => {
                             </div>
                             <button type="submit" className="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
                             <div className="register-link m-t-15 text-center">
-                                {/* <p>Don't have account ? <a href="#"> Sign Up Here</a></p> */}
                                 <p>Don't have account ? <Link to="/register"> Sign Up Here</Link></p>
                             </div>
                         </form>
