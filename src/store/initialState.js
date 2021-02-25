@@ -1,8 +1,7 @@
 const initialState = {
-	userId: null,
-	accessToken: null,
-	training: [],
-	trainingType: []
+	logged: false,
+	trainings: [],
+	trainingsTypes: []
 }
 
 export default initialState;

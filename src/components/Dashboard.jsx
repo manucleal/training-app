@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import HealthCondition from "./HealthCondition";
@@ -10,36 +11,24 @@ import AddTraining from "./AddTraining";
 import Footer from "./Footer";
 
 // Services
-import { ApiService } from "../services/ApiService";
+import ApiService from "../services/ApiService.js";
 
 const Dashboard = (props) => {
-
-    const [ training, setTraining ] = useState([]);
-    const [ trainingType, setTrainingType ] = useState([]);
-    const instance = new ApiService();
-
+    
     useEffect(async() => {
-        // let loginResult = await instance.Login();
-        // if(loginResult.token){
-        //     let storage = window.localStorage;
-        //     storage.setItem('credentials', JSON.stringify(loginResult));
-            
-        //     // props.dispatch({ type:'setCredentials', payload: loginResult });
-        // }
-        // let getTrainingresult = await instance.GetTrainings(props.id, props.accessToken);
-
-        // if(getTrainingresult.ok){
-        //     console.log('ENTROOOO');
-        //     console.log(getTrainingresult);
-        //     props.dispatch({ type:'setTraining', payload: getTrainingresult });
-        // }
-        // setTrainingType(await instance.GetTrainingTypes());
-        // setTraining(await instance.GetTrainings(sessionStorage.id));
+        let responseGetTrainings = await ApiService.getTrainings();
+        if(responseGetTrainings.length){
+            props.dispatch({ type:'SET_TRAININGS', payload: responseGetTrainings });
+        }
+        let responseGetTrainingsTypes = await ApiService.getTrainingsTypes();
+        if(responseGetTrainingsTypes.length){
+            props.dispatch({ type:'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });
+        }
     }, []);
 
+    if (!props.logged) return <Redirect to="/login" />;
+    
     const addTraining = async trinning => {
-        // instance.SetToken(sessionStorage.token);
-        // trinning.user_id = sessionStorage.id;
         // let responseSave = await instance.SaveTrainings(trinning);
         // if(responseSave.status == 200){
         //     setTraining([...training, trinning]);
@@ -61,7 +50,7 @@ const Dashboard = (props) => {
                         </div>
 
                         <div className="col-lg-6 col-md-6">
-                            <TrainingCounter trainingCounter={ training.length }/>
+                            <TrainingCounter trainingCounter={ props.trainings.length }/>
                         </div>
                     </div>
 
@@ -69,11 +58,11 @@ const Dashboard = (props) => {
 
                     <div className="orders">
                         <div className="row">
-                            <TrainingList training={ training }/>
+                            <TrainingList training={ props.trainings }/>
                             <div className="col-xl-4">
                                 <div className="row">
                                     <ChartImc />
-                                    <AddTraining trainingType={ trainingType } addTraining={ addTraining } />
+                                    <AddTraining trainingType={ props.trainingsTypes } addTraining={ addTraining } />
                                 </div>
                             </div>
                         </div>
@@ -262,10 +251,9 @@ const Dashboard = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    id: state.userId,
-    accessToken: state.accessToken,
-    training: state.training,
-    // trainingType: state.trainingType
+    logged: state.logged,
+    trainings: state.trainings,
+    trainingsTypes: state.trainingsTypes
 })
 
 export default connect(mapStateToProps)(Dashboard);

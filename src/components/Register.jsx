@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Register = () => {
     return (
         <div className="sufee-login d-flex align-content-center flex-wrap">
@@ -13,15 +15,15 @@ const Register = () => {
                         <form>
                             <div className="form-group">
                                 <label>User Name</label>
-                                <input type="email" className="form-control" placeholder="User Name" />
+                                <input type="email" className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label>User Height</label>
-                                <input type="number" className="form-control" placeholder="User Height" />
+                                <input type="number" className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label>Password</label>
-                                <input type="password" className="form-control" placeholder="Password" />
+                                <input type="password" className="form-control" />
                             </div>
                             <div className="checkbox">
                                 <label>
@@ -30,7 +32,7 @@ const Register = () => {
                             </div>
                             <button type="submit" className="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
                             <div className="register-link m-t-15 text-center">
-                                <p>Already have account ? <a href="#"> Sign in</a></p>
+                                <p>Already have account ? <Link to="/login"> Sign in</Link></p>
                             </div>
                         </form>
                     </div>
