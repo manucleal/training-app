@@ -23,7 +23,6 @@ const AddTraining = ({ trainingType, dispatch }) => {
             weight: Number(data.weight)
         }
         let responseSaveTrainings = await ApiService.saveTrainings(formatData);
-        console.log(responseSaveTrainings);
         if(responseSaveTrainings.status && responseSaveTrainings.status == 200){
             dispatch({ type: "SAVE_TRAINING", payload: formatData });
         }

@@ -84,13 +84,14 @@ const saveTrainings = (data) => {
     const action = 'trainings'
     httpHeaders.Authorization = credentials.token;
     data.user_id = credentials.id;
-    console.log(data);
     return post(apiUrl + action, JSON.stringify(data), httpHeaders);
 };
 
-const deleteTrainings = (user_id, training_id) => {
-    const action = `users/${user_id}/trainings/${training_id}`;
-    return this.delete(this.apiUrl + action, this.httpHeaders);
+const deleteTrainings = (trainingId) => {
+    const credentials = JSON.parse(localStorage.getItem('credentials'));
+    const action = `users/${credentials.id}/trainings/${trainingId}`;
+    httpHeaders.Authorization = credentials.token;
+    return del(apiUrl + action, httpHeaders);
 };
 
 module.exports = {

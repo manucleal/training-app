@@ -1,4 +1,17 @@
-const TrainingList = ({ training }) => {
+import { connect } from 'react-redux';
+
+// Services
+import ApiService, { login } from "../services/ApiService";
+
+const TrainingList = ({ training, dispatch }) => {
+    
+    const deleteTraining = async (id) => {
+        let responseDeleteTrainings = await ApiService.deleteTrainings(id);
+        if(responseDeleteTrainings.message && responseDeleteTrainings.message == 'Entrenamiento borrrado satisfactoriamente'){
+            dispatch({ type: "DELETE_TRAINING", payload: id });
+        }
+    }
+
     return (
         <div className="col-xl-8">
             <div className="card">
@@ -33,7 +46,7 @@ const TrainingList = ({ training }) => {
                                             <td><span className="name">{t.trainning_type}</span></td>
                                             <td><span className="product">{t.minutes}</span></td>
                                             <td><span className="count">{t.weight}</span></td>
-                                            <td><span className="badge badge-pending">Delete</span></td>
+                                            <td><span className="badge badge-pending" onClick={ () => deleteTraining(t.id) } >Delete</span></td>
                                         </tr>
                                     )
                                 }
@@ -46,4 +59,8 @@ const TrainingList = ({ training }) => {
     );
 }
 
-export default TrainingList;
+const mapStateToProps = (state) => ({
+
+})
+
+export default connect(mapStateToProps)(TrainingList);
