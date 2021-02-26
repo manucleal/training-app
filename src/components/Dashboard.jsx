@@ -7,6 +7,7 @@ import HealthCondition from "./HealthCondition";
 import TrainingCounter from "./TrainingCounter";
 import ChartImc from "./ChartImc";
 import TrainingList from "./TrainingList";
+import TrainingTypeList from "./TrainingTypeList";
 import AddTraining from "./AddTraining";
 import Footer from "./Footer";
 
@@ -27,15 +28,7 @@ const Dashboard = (props) => {
     }, []);
 
     if (!props.logged) return <Redirect to="/login" />;
-    
-    const addTraining = async trinning => {
-        // let responseSave = await instance.SaveTrainings(trinning);
-        // if(responseSave.status == 200){
-        //     setTraining([...training, trinning]);
-        // }
-        // console.log(responseSave);        
-    }
-
+    let trainingsByMinutes = [];
     return (
     <>
         <Sidebar />
@@ -58,11 +51,11 @@ const Dashboard = (props) => {
 
                     <div className="orders">
                         <div className="row">
-                            <TrainingList training={ props.trainings }/>
+                            <TrainingList trainings={ props.trainings }/>
                             <div className="col-xl-4">
                                 <div className="row">
                                     <ChartImc />
-                                    <AddTraining trainingType={ props.trainingsTypes } addTraining={ addTraining } />
+                                    <AddTraining trainingType={ props.trainingsTypes } />
                                 </div>
                             </div>
                         </div>
@@ -70,23 +63,7 @@ const Dashboard = (props) => {
 
                     <div className="row">
                         <div className="col-lg-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h4 className="card-title box-title">To Do List</h4>
-                                    <div className="card-content">
-                                        <div className="todo-list">
-                                            <div className="tdl-holder">
-                                                <div className="tdl-content">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* .todo-list */}
-                                    </div>
-                                </div>
-                                {/* .card-body */}
-                            </div>
-                            {/* .card */}
+                            <TrainingTypeList />
                         </div>
 
                         <div className="col-lg-6">
@@ -113,7 +90,6 @@ const Dashboard = (props) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {/* .msg-received */}
                                                 </li>
                                                 <li>
                                                     <div className="msg-sent msg-container">
@@ -132,7 +108,6 @@ const Dashboard = (props) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {/* .msg-sent */}
                                                 </li>
                                             </ul>
                                             <div className="send-mgs">
@@ -144,15 +119,12 @@ const Dashboard = (props) => {
                                                 </button>
                                             </div>
                                         </div>
-                                        {/* .messenger-box */}
                                     </div>
                                 </div>
-                                {/* .card-body */}
                             </div>
-                            {/* .card */}
                         </div>
                     </div>
-                    {/* To Do and Live Chat  Calender Chart Weather  */}
+
                     <div className="row">
                         <div className="col-md-12 col-lg-4">
                             <div className="card">
@@ -163,7 +135,6 @@ const Dashboard = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            {/* .card */}
                         </div>
 
                         <div className="col-lg-4 col-md-6">
@@ -173,7 +144,6 @@ const Dashboard = (props) => {
                                 </div>
                                 <div id="cellPaiChart" className="float-chart"></div>
                             </div>
-                            {/* .card */}
                         </div>
                         <div className="col-lg-4 col-md-6">
                             <div className="card weather-box">
@@ -184,7 +154,6 @@ const Dashboard = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            {/* .card */}
                         </div>
                     </div>
                     {/* Calender Chart Weather */}
@@ -241,7 +210,6 @@ const Dashboard = (props) => {
                             </div>
                         </div>
                     </div>
-                    {/* #add-category */}
                 </div>
             </div>
             <Footer />

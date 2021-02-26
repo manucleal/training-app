@@ -10,6 +10,8 @@ const reducer = (state = initialState, action) => {
 			return { ...state, trainings: action.payload }
 		case 'SET_TRAININGS_TYPES':
 			return { ...state, trainingsTypes: action.payload }
+		case 'SET_TRAINING_TYPES_MIN':
+			return { ...state, trainingsTypesMin: action.payload }
 		case 'SAVE_TRAINING':
 			return { ...state, trainings: [...state.trainings, action.payload ] }
 		case 'DELETE_TRAINING':

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
 // Services
-import ApiService, { login } from "../services/ApiService";
+import ApiService from "../services/ApiService";
 
-const TrainingList = ({ training, dispatch }) => {
-    
+const TrainingList = ({ trainings, trainingsTypes, dispatch }) => {
+
     const deleteTraining = async (id) => {
         let responseDeleteTrainings = await ApiService.deleteTrainings(id);
         if(responseDeleteTrainings.message && responseDeleteTrainings.message == 'Entrenamiento borrrado satisfactoriamente'){
@@ -16,7 +16,7 @@ const TrainingList = ({ training, dispatch }) => {
         <div className="col-xl-8">
             <div className="card">
                 <div className="card-body">
-                    <h4 className="box-title">Training</h4>
+                    <h4 className="box-title">Trainings</h4>
                 </div>
                 <div className="card-body--">
                     <div className="table-stats order-table ov-h">
@@ -34,7 +34,7 @@ const TrainingList = ({ training, dispatch }) => {
                             </thead>
                             <tbody>
                                 {
-                                    training.map((t, i) => 
+                                    trainings.map((t, i) => 
                                         <tr key={i}>
                                             <td className="serial">{i+1}.</td>
                                             <td className="avatar">
@@ -43,7 +43,7 @@ const TrainingList = ({ training, dispatch }) => {
                                                 </div>
                                             </td>
                                             <td>#{t.id}</td>
-                                            <td><span className="name">{t.trainning_type}</span></td>
+                                            <td><span className="name">{trainingsTypes.find(tt => tt.id == t.trainning_type).name}</span></td>
                                             <td><span className="product">{t.minutes}</span></td>
                                             <td><span className="count">{t.weight}</span></td>
                                             <td><span className="badge badge-pending" onClick={ () => deleteTraining(t.id) } >Delete</span></td>
@@ -60,7 +60,7 @@ const TrainingList = ({ training, dispatch }) => {
 }
 
 const mapStateToProps = (state) => ({
-
+    trainingsTypes: state.trainingsTypes
 })
 
 export default connect(mapStateToProps)(TrainingList);
