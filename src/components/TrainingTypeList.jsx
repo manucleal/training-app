@@ -23,7 +23,7 @@ const TrainingTypeList = ({ trainings, trainingsTypes, trainingsTypesMin, dispat
     return (
         <div className="card">
             <div className="card-body">
-                <h4 className="card-title box-title">Trainings per minute</h4>
+                <h4 className="card-title box-title">Minutes per type of trainings</h4>
                 <div className="card-content">
                     <div className="table-stats order-table ov-h">
                         <table className="table ">

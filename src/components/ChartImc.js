@@ -14,6 +14,7 @@ const ChartImc = ({ trainings, dispatch }) => {
         <div className="col-lg-6 col-xl-12">
             <div className="card br-0">
                 <div className="card-body">
+                    <h4 className="card-title box-title">Chart</h4>
                     <div className="chart-container ov-h">
                         <Line
                             data={{
