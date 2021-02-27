@@ -15,8 +15,8 @@ const TrainingTypeList = ({ trainings, trainingsTypes, trainingsTypesMin, dispat
         });
         return Array.from(map, ([ trainingsTypes, minutes ]) => ({ trainingsTypes, minutes }));
     }
-    
-    useEffect(async() => {
+
+    useEffect(() => {
         dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(trainings) });
     },[trainings]);
 

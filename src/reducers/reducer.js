@@ -14,6 +14,8 @@ const reducer = (state = initialState, action) => {
 			return { ...state, trainingsTypesMin: action.payload }
 		case 'SAVE_TRAINING':
 			return { ...state, trainings: [...state.trainings, action.payload ] }
+		case 'SAVE_IMC':
+			return { ...state, imc: action.payload };	
 		case 'DELETE_TRAINING':
 			return { ...state, trainings: state.trainings.filter(t => t.id != action.payload) }
 		default:

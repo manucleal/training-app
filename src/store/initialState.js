@@ -2,7 +2,8 @@ const initialState = {
 	logged: false,
 	trainings: [],
 	trainingsTypes: [],
-	trainingsTypesMin: []
+	trainingsTypesMin: [],
+	imc: [],
 }
 
 export default initialState;

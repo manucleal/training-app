@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { connect } from 'react-redux';
 
-const ChartImc = ({ trainings }) => {
+const ChartImc = ({ trainings, dispatch }) => {
     const height = JSON.parse(localStorage.getItem('credentials')).height / 100;
     const dataChart = trainings.map(t => (t.weight / (height * height)) );
-    console.log(dataChart);
+    
+    useEffect(() => {
+        dispatch({ type: "SAVE_IMC", payload: dataChart });
+    },[trainings]);
+
     return (
         <div className="col-lg-6 col-xl-12">
             <div className="card br-0">

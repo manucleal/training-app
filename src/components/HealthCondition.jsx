@@ -1,4 +1,21 @@
-const HealthCondition = () => {
+import { connect } from 'react-redux';
+
+const HealthCondition = ({ trainings, imc }) => {
+    
+    const health = { good: 'Your health is good', medium: 'Your health is medium', bad: 'Your health is bad' };
+    const lastWeight = trainings[trainings.length -1].weight;
+    const lastImc = imc[imc.length -1];
+
+    const showMessage = () => {
+        if(lastImc > 10 && lastImc < 24){
+            return health['good'];
+        } else if((lastImc >= 24 && lastImc <= 27) || (lastImc <= 9 && lastImc >= 3)){
+            return health['medium'];
+        } else {
+            return health['bad'];
+        }
+    }
+
     return (
         <div className="card">
             <div className="card-body">
@@ -8,8 +25,8 @@ const HealthCondition = () => {
                     </div>
                     <div className="stat-content">
                         <div className="text-left dib">
-                            {/* <div className="stat-text">$<span className="count">23569</span></div> */}
                             <div className="stat-heading">Health Condition</div>
+                            <p>{showMessage()}</p>
                         </div>
                     </div>
                 </div>
@@ -18,4 +35,9 @@ const HealthCondition = () => {
     );
 }
 
-export default HealthCondition;
+const mapStateToProps = (state) => ({
+    trainings: state.trainings,
+    imc: state.imc
+})
+
+export default connect(mapStateToProps)(HealthCondition);

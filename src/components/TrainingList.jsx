@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import ApiService from "../services/ApiService";
 
 const TrainingList = ({ trainings, trainingsTypes, dispatch }) => {
-    console.log(trainings);
-    let test = localStorage.getItem('credentials');
-    console.log(test);
+
     const deleteTraining = async (id) => {
         let responseDeleteTrainings = await ApiService.deleteTrainings(id);
         if(responseDeleteTrainings.message && responseDeleteTrainings.message == 'Entrenamiento borrrado satisfactoriamente'){
