@@ -2,7 +2,6 @@ import { Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 
 const ChartTrainingType = ({ trainingsTypesMin }) => {
-    console.log(trainingsTypesMin);
     return(
         <div className="card">
             <div className="card-body">

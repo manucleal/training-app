@@ -5,7 +5,8 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import HealthCondition from "./HealthCondition";
 import TrainingCounter from "./TrainingCounter";
-import ChartImc from "./ChartImc.js";
+import WeightVariation from "./WeightVariation";
+import ChartImc from "./ChartImc";
 import ChartTrainingType from "./ChartTrainingType";
 import TrainingList from "./TrainingList";
 import TrainingTypeList from "./TrainingTypeList";
@@ -39,12 +40,16 @@ const Dashboard = (props) => {
                     <div className="animated fadeIn">
 
                         <div className="row">
-                            <div className="col-lg-6 col-md-6">
+                            <div className="col-lg-4 col-md-4">
                                 <HealthCondition />
                             </div>
 
-                            <div className="col-lg-6 col-md-6">
+                            <div className="col-lg-4 col-md-4">
                                 <TrainingCounter trainingCounter={props.trainings.length} />
+                            </div>
+
+                            <div className="col-lg-4 col-md-4">
+                                <WeightVariation />
                             </div>
                         </div>
 

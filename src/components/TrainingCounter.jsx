@@ -8,8 +8,8 @@ const TrainingCounter = ({ trainingCounter }) => {
                     </div>
                     <div className="stat-content">
                         <div className="text-left dib">
-                            <div className="stat-text"><span className="count">{ trainingCounter }</span></div>
                             <div className="stat-heading">Training Counter</div>
+                            <p>{ trainingCounter }</p>
                         </div>
                     </div>
                 </div>

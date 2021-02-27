@@ -6,6 +6,8 @@ const reducer = (state = initialState, action) => {
 			return { ...state, logged: true }		
 		case 'LOGIN':
 			return { ...state, logged: true }
+		case 'LOGOUT':
+			return { ...state, logged: false }			
         case 'SET_TRAININGS':
 			return { ...state, trainings: action.payload }
 		case 'SET_TRAININGS_TYPES':

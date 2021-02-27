@@ -586,7 +586,8 @@ aside.left-panel {
   display: inline-block;
   margin: 0;
   padding: 0;
-  vertical-align: top; }
+  vertical-align: top;  
+}
   .navbar .main-menu {
     float: left;
     padding: 0;

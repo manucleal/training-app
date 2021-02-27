@@ -54,15 +54,6 @@ const Login = ({ logged, dispatch }) => {
                                     {errors?.password?.message}
                                 </span>                            
                             </div>
-                            <div className="checkbox">
-                                <label>
-                                    <input type="checkbox" /> Remember Me
-                            </label>
-                                <label className="pull-right">
-                                    <a href="#">Forgotten Password?</a>
-                                </label>
-
-                            </div>
                             <button type="submit" className="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
                             <div className="register-link m-t-15 text-center">
                                 <p>Don't have account ? <Link to="/register"> Sign Up Here</Link></p>

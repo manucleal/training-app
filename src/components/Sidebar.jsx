@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Sidebar = () => {
     return (
         <aside id="left-panel" className="left-panel">
@@ -5,7 +7,7 @@ const Sidebar = () => {
                 <div id="main-menu" className="main-menu collapse navbar-collapse">
                     <ul className="nav navbar-nav">
                         <li className="active">
-                            <a href="index.html"><i className="menu-icon fa fa-laptop"></i>Dashboard </a>
+                            <Link to="/"><i className="menu-icon fa fa-laptop"></i>Dashboard </Link>
                         </li>
                     </ul>
                 </div>

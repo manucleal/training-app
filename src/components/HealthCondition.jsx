@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import { connect } from 'react-redux';
 
 const HealthCondition = ({ trainings, imc }) => {
     
     const health = { good: 'Your health is good', medium: 'Your health is medium', bad: 'Your health is bad' };
     const lastWeight = trainings[trainings.length -1].weight;
-    const lastImc = imc[imc.length -1];
 
     const showMessage = () => {
+        const lastImc = imc[imc.length -1];
         if(lastImc > 10 && lastImc < 24){
             return health['good'];
         } else if((lastImc >= 24 && lastImc <= 27) || (lastImc <= 9 && lastImc >= 3)){
@@ -25,7 +26,7 @@ const HealthCondition = ({ trainings, imc }) => {
                     </div>
                     <div className="stat-content">
                         <div className="text-left dib">
-                            <div className="stat-heading">Health Condition</div>
+                            <div className="stat-heading">Health Condition - KG {lastWeight}</div>
                             <p>{showMessage()}</p>
                         </div>
                     </div>

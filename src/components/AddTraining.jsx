@@ -24,6 +24,7 @@ const AddTraining = ({ trainingType, dispatch }) => {
         }
         let responseSaveTrainings = await ApiService.saveTrainings(formatData);
         if(responseSaveTrainings.status && responseSaveTrainings.status == 200){
+            formatData.id = responseSaveTrainings.data.trainingID;
             dispatch({ type: "SAVE_TRAINING", payload: formatData });
         }
     }
