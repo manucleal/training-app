@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 const WeightVariation = ({ trainings }) => {
     const lastIndex = trainings.length -1;
-    const lastWeight = trainings[lastIndex].weight;
+    const lastWeight = (trainings.length) ? trainings[lastIndex].weight : 0;
     const penultimateWeight = (lastIndex > 0) ? trainings[lastIndex -1].weight : '';
 
     return (

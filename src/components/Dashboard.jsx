@@ -17,10 +17,11 @@ import Footer from "./Footer";
 import ApiService from "../services/ApiService.js";
 
 const Dashboard = (props) => {
-
+    
     useEffect(async () => {
         let responseGetTrainings = await ApiService.getTrainings();
         if (responseGetTrainings.length) {
+            responseGetTrainings = responseGetTrainings.sort((a, b) => a.id - b.id);
             props.dispatch({ type: 'SET_TRAININGS', payload: responseGetTrainings });
         }
         let responseGetTrainingsTypes = await ApiService.getTrainingsTypes();
@@ -41,7 +42,7 @@ const Dashboard = (props) => {
 
                         <div className="row">
                             <div className="col-lg-4 col-md-4">
-                                <HealthCondition />
+                                {/* <HealthCondition /> */}
                             </div>
 
                             <div className="col-lg-4 col-md-4">

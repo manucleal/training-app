@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { connect } from 'react-redux';
 
 const TrainingTypeList = ({ trainings, trainingsTypes, trainingsTypesMin, dispatch }) => {
-
+    
     const groupBy = (trainings) => {
         const map = new Map();
         trainings.forEach((item) => {            
@@ -17,7 +17,9 @@ const TrainingTypeList = ({ trainings, trainingsTypes, trainingsTypesMin, dispat
     }
 
     useEffect(() => {
-        dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(trainings) });
+        if(trainingsTypes.length) {
+            dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(trainings) });
+        }        
     },[trainings]);
 
     return (
