@@ -8,16 +8,17 @@ import { alertService } from '../services/alert.service';
 
 const Login = ({ dispatch }) => {
     
-    const { register, errors, handleSubmit, setError, reset } = useForm({});
+    const { register, errors, handleSubmit } = useForm({});
     let history = useHistory();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data) => {        
         localStorage.clear();
         let responseLogin = await ApiService.login(data);
         
         if(responseLogin.id) {            
             localStorage.setItem('credentials', JSON.stringify(responseLogin));
-            dispatch({ type:"LOGIN" });
+            dispatch({ type: "LOGOUT" });
+            dispatch({ type: "LOGIN" });
             history.push('/');
         } else {       
             alertService.error('User Name or password incorrect', { keepAfterRouteChange: true });

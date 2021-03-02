@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { connect } from "react-redux";
 import Select from 'react-select';
@@ -11,12 +11,11 @@ const AddTraining = ({ trainingType, dispatch }) => {
 
     const { register, errors, handleSubmit, reset } = useForm({});
     const [ selectedOption, setSelectedOption ] = useState([]);
-    const allOptionsSelect = trainingType.map(t => ({ value: t.id, label: t.name } ));
     
     const handleChange = e => {
         setSelectedOption(e);
     }
-    
+
     const onSubmit = async (data) => {
         let formatData = {
             minutes: Number(data.minutes),
@@ -62,13 +61,18 @@ const AddTraining = ({ trainingType, dispatch }) => {
                                 {errors?.weight?.message}
                             </span>
                         </div>
-                        <Select
-                            placeholder="Choose One Training"
-                            value={ selectedOption }
-                            options={ allOptionsSelect }
-                            onChange={ handleChange }
-                            validate={'Required'}
-                        />
+                        { trainingType !== 0 ? (
+                            <Select
+                                placeholder="Choose One Training"
+                                value={ selectedOption }
+                                // options={ allOptionsSelect }
+                                options={ trainingType.map(t => ({ value: t.id, label: t.name } )) }
+                                formatOptions
+                                onChange={ handleChange }
+                            />
+                        ) : (
+                            <p>Loading .. </p>
+                        )}
                         <button type="submit" id="submit-add-trinning" className="btn btn-success" >Save</button>
                     </form>
                 </div>
@@ -78,7 +82,7 @@ const AddTraining = ({ trainingType, dispatch }) => {
 }
 
 const mapStateToProps = (state) => ({
-    
+
 })
 
 export default connect(mapStateToProps)(AddTraining);

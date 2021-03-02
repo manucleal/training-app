@@ -67,16 +67,24 @@ const login = (credentials) => {
 
 const getTrainings = () => {
     const credentials = JSON.parse(localStorage.getItem('credentials'));
-    const action = `users/${credentials.id}/trainings`;
-    httpHeaders.Authorization = credentials.token;
-    return get(apiUrl + action, httpHeaders);
+    if(credentials) {
+        const action = `users/${credentials.id}/trainings`;
+        httpHeaders.Authorization = credentials.token;
+        return get(apiUrl + action, httpHeaders);
+    } else {
+        return [];
+    }
 };
 
 const getTrainingsTypes = () => {
     const credentials = JSON.parse(localStorage.getItem('credentials'));
-    const action = 'training-types';
-    httpHeaders.Authorization = credentials.token;
-    return get(apiUrl + action, httpHeaders);
+    if(credentials) { 
+        const action = 'training-types';
+        httpHeaders.Authorization = credentials.token;
+        return get(apiUrl + action, httpHeaders);
+    } else {
+        return [];
+    }
 };
 
 const saveTrainings = (data) => {

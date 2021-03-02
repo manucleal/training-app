@@ -18,6 +18,8 @@ import Footer from "./Footer";
 import ApiService from "../services/ApiService.js";
 
 const Dashboard = ({ trainings, trainingsTypes, logged, dispatch }) => {
+    let responseGetTrainings = [];
+    let responseGetTrainingsTypes = [];
     
     const groupBy = (trainingsList, trainingsListTypes) => {
         const map = new Map();
@@ -33,19 +35,21 @@ const Dashboard = ({ trainings, trainingsTypes, logged, dispatch }) => {
     }
 
     useEffect(async () => {
-        let responseGetTrainings = await ApiService.getTrainings();
-        let responseGetTrainingsTypes = await ApiService.getTrainingsTypes();
-        
-        if (responseGetTrainingsTypes.length && responseGetTrainings.length) {
-            responseGetTrainings = responseGetTrainings.sort((a, b) => a.id - b.id);
-            console.log();
-            dispatch({ type: 'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });
-            dispatch({ type: 'SET_TRAININGS', payload: responseGetTrainings });            
-            dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(responseGetTrainings, responseGetTrainingsTypes) });
+        if(logged){
+            responseGetTrainings = await ApiService.getTrainings();
+            responseGetTrainingsTypes = await ApiService.getTrainingsTypes();
+            if (responseGetTrainingsTypes.length) {                
+                dispatch({ type: 'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });                                
+            }
+            if(responseGetTrainings.length){
+                responseGetTrainings = responseGetTrainings.sort((a, b) => a.id - b.id);
+                dispatch({ type: 'SET_TRAININGS', payload: responseGetTrainings });
+                dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(responseGetTrainings, responseGetTrainingsTypes) });
+            }
         }
-    }, []);
+    }, [logged]);
 
-    useEffect(() => {        
+    useEffect(() => {  
         dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(trainings, trainingsTypes) });
     },[trainings, trainingsTypes]);
 
