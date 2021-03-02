@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Alert } from './/Alert';
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import HealthCondition from "./HealthCondition";
@@ -16,37 +17,56 @@ import Footer from "./Footer";
 // Services
 import ApiService from "../services/ApiService.js";
 
-const Dashboard = (props) => {
+const Dashboard = ({ trainings, trainingsTypes, logged, dispatch }) => {
     
+    const groupBy = (trainingsList, trainingsListTypes) => {
+        const map = new Map();
+        trainingsList.forEach((item) => {            
+            const trainingName = trainingsListTypes.find(tt => tt.id == item.trainning_type).name;
+            if (map.has(trainingName)) {                
+                map.set(trainingName, map.get(trainingName) + item.minutes );
+            } else {
+                map.set(trainingName, item.minutes);
+            }
+        });
+        return Array.from(map, ([ trainingsTypes, minutes ]) => ({ trainingsTypes, minutes }));
+    }
+
     useEffect(async () => {
         let responseGetTrainings = await ApiService.getTrainings();
-        if (responseGetTrainings.length) {
-            responseGetTrainings = responseGetTrainings.sort((a, b) => a.id - b.id);
-            props.dispatch({ type: 'SET_TRAININGS', payload: responseGetTrainings });
-        }
         let responseGetTrainingsTypes = await ApiService.getTrainingsTypes();
-        if (responseGetTrainingsTypes.length) {
-            props.dispatch({ type: 'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });
+        
+        if (responseGetTrainingsTypes.length && responseGetTrainings.length) {
+            responseGetTrainings = responseGetTrainings.sort((a, b) => a.id - b.id);
+            console.log();
+            dispatch({ type: 'SET_TRAININGS_TYPES', payload: responseGetTrainingsTypes });
+            dispatch({ type: 'SET_TRAININGS', payload: responseGetTrainings });            
+            dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(responseGetTrainings, responseGetTrainingsTypes) });
         }
     }, []);
 
-    if (!props.logged) return <Redirect to="/login" />;
+    useEffect(() => {        
+        dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(trainings, trainingsTypes) });
+    },[trainings, trainingsTypes]);
+
+    if (!logged) return <Redirect to="/login" />;
 
     return (
         <>
             <Sidebar />
             <div id="right-panel" className="right-panel">
                 <Header />
+                <Alert />
                 <div className="content">
                     <div className="animated fadeIn">
 
                         <div className="row">
                             <div className="col-lg-4 col-md-4">
-                                {/* <HealthCondition /> */}
+                                <HealthCondition />
                             </div>
 
                             <div className="col-lg-4 col-md-4">
-                                <TrainingCounter trainingCounter={props.trainings.length} />
+                                <TrainingCounter trainingCounter={trainings.length} />
                             </div>
 
                             <div className="col-lg-4 col-md-4">
@@ -58,11 +78,11 @@ const Dashboard = (props) => {
 
                         <div className="orders">
                             <div className="row">
-                                <TrainingList trainings={props.trainings} />
+                                <TrainingList trainings={trainings} />
                                 <div className="col-xl-4">
                                     <div className="row">
                                         <ChartImc />
-                                        <AddTraining trainingType={props.trainingsTypes} />
+                                        <AddTraining trainingType={trainingsTypes} />
                                     </div>
                                 </div>
                             </div>

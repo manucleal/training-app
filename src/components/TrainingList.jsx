@@ -33,7 +33,7 @@ const TrainingList = ({ trainings, trainingsTypes, dispatch }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
+                                { trainings.length !== 0 && trainingsTypes.length !== 0 ? (
                                     trainings.map((t, i) => 
                                         <tr key={i}>
                                             <td className="serial">{i+1}.</td>
@@ -43,11 +43,13 @@ const TrainingList = ({ trainings, trainingsTypes, dispatch }) => {
                                                 </div>
                                             </td>
                                             <td>#{t.id}</td>
-                                            <td><span className="name">{trainingsTypes.find(tt => tt.id == t.trainning_type)?.name}</span></td>
+                                            <td><span className="name">{trainingsTypes.find(tt => tt.id == t.trainning_type).name}</span></td>
                                             <td><span className="product">{t.minutes}</span></td>
-                                            <td><span className="count">{t.minutes * trainingsTypes.find(tt => tt.id == t.trainning_type)?.calories_per_minute}</span></td>
+                                            <td><span className="count">{t.minutes * trainingsTypes.find(tt => tt.id == t.trainning_type).calories_per_minute}</span></td>
                                             <td><span className="badge badge-pending" onClick={ () => deleteTraining(t.id) } >Delete</span></td>
                                         </tr>
+                                    )) : (
+                                        <tr><td>No data Result ...</td></tr>
                                     )
                                 }
                             </tbody>

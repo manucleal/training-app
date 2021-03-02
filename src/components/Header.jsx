@@ -9,6 +9,7 @@ const Header = ({ dispatch }) => {
     }
 
     const logout = () => {
+        localStorage.removeItem('credentials');
         localStorage.clear();
         dispatch({ type: 'LOGOUT' });
     }

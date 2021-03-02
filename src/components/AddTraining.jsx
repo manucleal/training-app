@@ -5,6 +5,7 @@ import Select from 'react-select';
 
 // Services
 import ApiService from "../services/ApiService";
+import { alertService } from '../services/alert.service';
 
 const AddTraining = ({ trainingType, dispatch }) => {
 
@@ -24,8 +25,11 @@ const AddTraining = ({ trainingType, dispatch }) => {
         }
         let responseSaveTrainings = await ApiService.saveTrainings(formatData);
         if(responseSaveTrainings.status && responseSaveTrainings.status == 200){
+            window.scrollTo({ top: 0, left: 100, behavior: 'smooth' });
+            alertService.success('Training added', { keepAfterRouteChange: true });
             formatData.id = responseSaveTrainings.data.trainingID;
             dispatch({ type: "SAVE_TRAINING", payload: formatData });
+            reset();
         }
     }
 
@@ -63,6 +67,7 @@ const AddTraining = ({ trainingType, dispatch }) => {
                             value={ selectedOption }
                             options={ allOptionsSelect }
                             onChange={ handleChange }
+                            validate={'Required'}
                         />
                         <button type="submit" id="submit-add-trinning" className="btn btn-success" >Save</button>
                     </form>
@@ -73,7 +78,7 @@ const AddTraining = ({ trainingType, dispatch }) => {
 }
 
 const mapStateToProps = (state) => ({
-
+    
 })
 
 export default connect(mapStateToProps)(AddTraining);

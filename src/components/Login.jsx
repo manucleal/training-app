@@ -4,20 +4,23 @@ import { connect } from "react-redux";
 
 // Services
 import ApiService from "../services/ApiService";
+import { alertService } from '../services/alert.service';
 
-const Login = ({ logged, dispatch }) => {
+const Login = ({ dispatch }) => {
     
-    const { register, errors, handleSubmit, reset } = useForm({});
+    const { register, errors, handleSubmit, setError, reset } = useForm({});
     let history = useHistory();
 
     const onSubmit = async (data) => {
         localStorage.clear();
         let responseLogin = await ApiService.login(data);
         
-        if(responseLogin.id) {
+        if(responseLogin.id) {            
             localStorage.setItem('credentials', JSON.stringify(responseLogin));
             dispatch({ type:"LOGIN" });
             history.push('/');
+        } else {       
+            alertService.error('User Name or password incorrect', { keepAfterRouteChange: true });
         }
     }
 

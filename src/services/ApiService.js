@@ -1,7 +1,7 @@
 const apiUrl = 'https://trainning-rest-api.herokuapp.com/v1/';
 let httpHeaders = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
 };
 
 const get = async (url, httpHeaders) => {

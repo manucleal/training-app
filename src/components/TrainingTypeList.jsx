@@ -1,26 +1,6 @@
-import { useEffect } from "react";
 import { connect } from 'react-redux';
 
-const TrainingTypeList = ({ trainings, trainingsTypes, trainingsTypesMin, dispatch }) => {
-    
-    const groupBy = (trainings) => {
-        const map = new Map();
-        trainings.forEach((item) => {            
-            const trainingName = trainingsTypes.find(tt => tt.id == item.trainning_type).name;
-            if (map.has(trainingName)) {                
-                map.set(trainingName, map.get(trainingName) + item.minutes );
-            } else {
-                map.set(trainingName, item.minutes);
-            }
-        });
-        return Array.from(map, ([ trainingsTypes, minutes ]) => ({ trainingsTypes, minutes }));
-    }
-
-    useEffect(() => {
-        if(trainingsTypes.length) {
-            dispatch({ type: "SET_TRAINING_TYPES_MIN", payload: groupBy(trainings) });
-        }        
-    },[trainings]);
+const TrainingTypeList = ({ trainingsTypesMin }) => {
 
     return (
         <div className="card">
@@ -63,8 +43,6 @@ const TrainingTypeList = ({ trainings, trainingsTypes, trainingsTypesMin, dispat
 }
 
 const mapStateToProps = (state) => ({
-    trainings: state.trainings,
-    trainingsTypes: state.trainingsTypes,
     trainingsTypesMin: state.trainingsTypesMin
 })
 

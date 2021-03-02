@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 const ChartImc = ({ trainings, dispatch }) => {
     const height = JSON.parse(localStorage.getItem('credentials')).height / 100;
-    const dataChart = trainings.map(t => (t.weight / (height * height)) );
-    
-    useEffect(() => {
-        dispatch({ type: "SAVE_IMC", payload: dataChart });
-    },[trainings]);
+    // const dataImc = trainings.map(t => (t.weight / (height * height)) );
+    // const aux = dataImc;
+    // useEffect(() => {
+        // dispatch({ type: "SAVE_IMC", payload: aux });
+    // },[trainings]);
 
     return (
         <div className="col-lg-6 col-xl-12">
@@ -30,7 +30,7 @@ const ChartImc = ({ trainings, dispatch }) => {
                                 datasets: [
                                     {
                                         label: "IMC",
-                                        data: dataChart
+                                        data: trainings.map(t => (t.weight / (height * height)) )
                                     },
                                 ],
                             }}
