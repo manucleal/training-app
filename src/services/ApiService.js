@@ -102,7 +102,7 @@ const deleteTrainings = (trainingId) => {
     return del(apiUrl + action, httpHeaders);
 };
 
-module.exports = {
+export default {
     register: register,
     login: login,
     getTrainings: getTrainings,
